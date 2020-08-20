@@ -4,6 +4,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const client = new ApolloClient({
   uri: "http://api.spacex.land/graphql",
@@ -13,6 +14,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
+      <CssBaseline />
       <App />
     </BrowserRouter>
   </ApolloProvider>,
