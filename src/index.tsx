@@ -4,18 +4,22 @@ import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider, InMemoryCache, ApolloClient } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
+import theme from "./theme";
+import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 const client = new ApolloClient({
-  uri: "http://api.spacex.land/graphql",
+  uri: "https://api.spacex.land/graphql",
   cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <CssBaseline />
-      <App />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
     </BrowserRouter>
   </ApolloProvider>,
   document.getElementById("root")

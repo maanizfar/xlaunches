@@ -1320,27 +1320,25 @@ export type CoreMission = {
   flight?: Maybe<Scalars['Int']>;
 };
 
-export type LaunchInfoQueryVariables = Exact<{
-  id: Scalars['ID'];
-}>;
+export type NextLaunchQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LaunchInfoQuery = (
+export type NextLaunchQuery = (
   { __typename?: 'Query' }
-  & { launch?: Maybe<(
+  & { launchNext?: Maybe<(
     { __typename?: 'Launch' }
-    & Pick<Launch, 'id' | 'mission_id' | 'mission_name'>
-    & { rocket?: Maybe<(
+    & Pick<Launch, 'mission_name' | 'launch_date_local'>
+    & { launch_site?: Maybe<(
+      { __typename?: 'LaunchSite' }
+      & Pick<LaunchSite, 'site_name_long'>
+    )>, rocket?: Maybe<(
       { __typename?: 'LaunchRocket' }
       & Pick<LaunchRocket, 'rocket_name'>
-      & { rocket?: Maybe<(
-        { __typename?: 'Rocket' }
-        & Pick<Rocket, 'country'>
-      )>, second_stage?: Maybe<(
+      & { second_stage?: Maybe<(
         { __typename?: 'LaunchRocketSecondStage' }
         & { payloads?: Maybe<Array<Maybe<(
           { __typename?: 'Payload' }
-          & Pick<Payload, 'customers'>
+          & Pick<Payload, 'payload_type' | 'orbit' | 'nationality' | 'manufacturer' | 'customers'>
         )>>> }
       )> }
     )> }
@@ -1348,19 +1346,22 @@ export type LaunchInfoQuery = (
 );
 
 
-export const LaunchInfoDocument = gql`
-    query LaunchInfo($id: ID!) {
-  launch(id: $id) {
-    id
-    mission_id
+export const NextLaunchDocument = gql`
+    query NextLaunch {
+  launchNext {
     mission_name
+    launch_date_local
+    launch_site {
+      site_name_long
+    }
     rocket {
       rocket_name
-      rocket {
-        country
-      }
       second_stage {
         payloads {
+          payload_type
+          orbit
+          nationality
+          manufacturer
           customers
         }
       }
@@ -1370,27 +1371,26 @@ export const LaunchInfoDocument = gql`
     `;
 
 /**
- * __useLaunchInfoQuery__
+ * __useNextLaunchQuery__
  *
- * To run a query within a React component, call `useLaunchInfoQuery` and pass it any options that fit your needs.
- * When your component renders, `useLaunchInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useNextLaunchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useNextLaunchQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useLaunchInfoQuery({
+ * const { data, loading, error } = useNextLaunchQuery({
  *   variables: {
- *      id: // value for 'id'
  *   },
  * });
  */
-export function useLaunchInfoQuery(baseOptions?: Apollo.QueryHookOptions<LaunchInfoQuery, LaunchInfoQueryVariables>) {
-        return Apollo.useQuery<LaunchInfoQuery, LaunchInfoQueryVariables>(LaunchInfoDocument, baseOptions);
+export function useNextLaunchQuery(baseOptions?: Apollo.QueryHookOptions<NextLaunchQuery, NextLaunchQueryVariables>) {
+        return Apollo.useQuery<NextLaunchQuery, NextLaunchQueryVariables>(NextLaunchDocument, baseOptions);
       }
-export function useLaunchInfoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LaunchInfoQuery, LaunchInfoQueryVariables>) {
-          return Apollo.useLazyQuery<LaunchInfoQuery, LaunchInfoQueryVariables>(LaunchInfoDocument, baseOptions);
+export function useNextLaunchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<NextLaunchQuery, NextLaunchQueryVariables>) {
+          return Apollo.useLazyQuery<NextLaunchQuery, NextLaunchQueryVariables>(NextLaunchDocument, baseOptions);
         }
-export type LaunchInfoQueryHookResult = ReturnType<typeof useLaunchInfoQuery>;
-export type LaunchInfoLazyQueryHookResult = ReturnType<typeof useLaunchInfoLazyQuery>;
-export type LaunchInfoQueryResult = Apollo.QueryResult<LaunchInfoQuery, LaunchInfoQueryVariables>;
+export type NextLaunchQueryHookResult = ReturnType<typeof useNextLaunchQuery>;
+export type NextLaunchLazyQueryHookResult = ReturnType<typeof useNextLaunchLazyQuery>;
+export type NextLaunchQueryResult = Apollo.QueryResult<NextLaunchQuery, NextLaunchQueryVariables>;

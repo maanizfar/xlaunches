@@ -15,6 +15,8 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     justifyContent: "space-between",
+
+    padding: 0,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,

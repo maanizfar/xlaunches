@@ -1,7 +1,13 @@
 import React from "react";
+import Container from "@material-ui/core/Container";
+import NextLaunch from "../components/nextLaunch";
 
 const Home = () => {
-  return <div>Home Page</div>;
+  return (
+    <Container>
+      <NextLaunch />
+    </Container>
+  );
 };
 
 export default Home;
