@@ -1320,6 +1320,29 @@ export type CoreMission = {
   flight?: Maybe<Scalars['Int']>;
 };
 
+export type EventsQueryVariables = Exact<{
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+}>;
+
+
+export type EventsQuery = (
+  { __typename?: 'Query' }
+  & { histories?: Maybe<Array<Maybe<(
+    { __typename?: 'History' }
+    & Pick<History, 'title' | 'details' | 'event_date_utc'>
+    & { flight?: Maybe<(
+      { __typename?: 'Launch' }
+      & { links?: Maybe<(
+        { __typename?: 'LaunchLinks' }
+        & Pick<LaunchLinks, 'video_link'>
+      )> }
+    )> }
+  )>>> }
+);
+
 export type LaunchesQueryVariables = Exact<{
   order: Scalars['String'];
   sort: Scalars['String'];
@@ -1369,6 +1392,49 @@ export type NextLaunchQuery = (
 );
 
 
+export const EventsDocument = gql`
+    query Events($limit: Int, $offset: Int, $order: String, $sort: String) {
+  histories(limit: $limit, offset: $offset, order: $order, sort: $sort) {
+    title
+    details
+    event_date_utc
+    flight {
+      links {
+        video_link
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useEventsQuery__
+ *
+ * To run a query within a React component, call `useEventsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEventsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEventsQuery({
+ *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      order: // value for 'order'
+ *      sort: // value for 'sort'
+ *   },
+ * });
+ */
+export function useEventsQuery(baseOptions?: Apollo.QueryHookOptions<EventsQuery, EventsQueryVariables>) {
+        return Apollo.useQuery<EventsQuery, EventsQueryVariables>(EventsDocument, baseOptions);
+      }
+export function useEventsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EventsQuery, EventsQueryVariables>) {
+          return Apollo.useLazyQuery<EventsQuery, EventsQueryVariables>(EventsDocument, baseOptions);
+        }
+export type EventsQueryHookResult = ReturnType<typeof useEventsQuery>;
+export type EventsLazyQueryHookResult = ReturnType<typeof useEventsLazyQuery>;
+export type EventsQueryResult = Apollo.QueryResult<EventsQuery, EventsQueryVariables>;
 export const LaunchesDocument = gql`
     query Launches($order: String!, $sort: String!, $limit: Int, $offset: Int) {
   launches(order: $order, sort: $sort, limit: $limit, offset: $offset) {

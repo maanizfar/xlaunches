@@ -5,7 +5,7 @@ import LaunchesPage from "../pages/launches";
 import Rockets from "../pages/rockets";
 import About from "../pages/about";
 import Dragons from "../pages/dragons";
-import Events from "../pages/events";
+import EventsPage from "../pages/events";
 import Navigation from "./navigation";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
         <Route path="/rockets" element={<Rockets />} />
         <Route path="/about" element={<About />} />
         <Route path="/dragons" element={<Dragons />} />
-        <Route path="/events" element={<Events />} />
+        <Route path="/events" element={<EventsPage />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </>

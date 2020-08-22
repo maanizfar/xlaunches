@@ -16,6 +16,7 @@ const client = new ApolloClient({
       Query: {
         fields: {
           launches: offsetLimitPagination(),
+          histories: offsetLimitPagination(),
         },
       },
     },

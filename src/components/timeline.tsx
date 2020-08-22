@@ -1,7 +1,9 @@
 import React from "react";
 import moment from "moment";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import Fade from "@material-ui/core/Fade";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { Timeline as MDTimeline } from "@material-ui/lab/";
 import TimelineItem from "@material-ui/lab/TimelineItem";
@@ -10,14 +12,30 @@ import TimelineConnector from "@material-ui/lab/TimelineConnector";
 import TimelineContent from "@material-ui/lab/TimelineContent";
 import TimelineDot from "@material-ui/lab/TimelineDot";
 import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
+import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    padding: 0,
-    flexGrow: 2.5,
+    // flexGrow: 100,
+    [theme.breakpoints.only("sm")]: {
+      flexGrow: 5,
+    },
+    // [theme.breakpoints.up("md")]: {
+    //   flexGrow: 3,
+    // },
+    // [theme.breakpoints.up("lg")]: {
+    //   flexGrow: 1.45,
+    // },
+    // [theme.breakpoints.up("xl")]: {
+    //   flexGrow: 1.2,
+    // },
+  },
 
-    [theme.breakpoints.up("md")]: {
-      flexGrow: 1.6,
+  oppositeContent: {
+    display: "none",
+
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
     },
   },
 }));
@@ -31,36 +49,51 @@ type TimelineProps = {
 };
 
 const Timeline: React.FC<TimelineProps> = ({ data }: TimelineProps) => {
-  const { content } = useStyles();
+  const { content, oppositeContent } = useStyles();
+  const theme = useTheme();
+  const smallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <MDTimeline align="left" data-testid="timeline">
-      {data?.map((entry, i) => (
-        <TimelineItem key={i}>
-          <TimelineOppositeContent>
-            <Typography variant="body1" component="p" style={{ margin: 0 }}>
-              {moment(entry.time).format("MMMM Do, YYYY")}
-            </Typography>
-          </TimelineOppositeContent>
-          <TimelineSeparator>
-            <TimelineDot
-              data-testid="dot"
-              style={{
-                backgroundColor: entry.dotColor,
-              }}
-            />
-            <TimelineConnector />
-          </TimelineSeparator>
-          <TimelineContent
-            classes={{
-              root: content,
-            }}
-          >
-            {entry.content}
-          </TimelineContent>
-        </TimelineItem>
-      ))}
-    </MDTimeline>
+    <Container>
+      <MDTimeline
+        align={smallScreen ? "left" : "alternate"}
+        data-testid="timeline"
+      >
+        {data?.map((entry, i) => (
+          <Fade timeout={1000} in={true} key={i}>
+            <TimelineItem>
+              <TimelineOppositeContent classes={{ root: oppositeContent }}>
+                <Typography
+                  variant="body1"
+                  component="p"
+                  style={{ margin: 0 }}
+                  color="secondary"
+                >
+                  {moment(entry.time).format("MMMM Do, YYYY")}
+                </Typography>
+              </TimelineOppositeContent>
+
+              <TimelineSeparator>
+                <TimelineDot
+                  data-testid="dot"
+                  style={{
+                    backgroundColor: entry.dotColor,
+                  }}
+                />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent
+                classes={{
+                  root: content,
+                }}
+              >
+                {entry.content}
+              </TimelineContent>
+            </TimelineItem>
+          </Fade>
+        ))}
+      </MDTimeline>
+    </Container>
   );
 };
 

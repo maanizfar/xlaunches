@@ -1,7 +1,12 @@
 import React from "react";
+import Events from "../components/events";
 
-const Events = () => {
-  return <div>Events</div>;
+const EventsPage = () => {
+  return (
+    <section id="events">
+      <Events />
+    </section>
+  );
 };
 
-export default Events;
+export default EventsPage;

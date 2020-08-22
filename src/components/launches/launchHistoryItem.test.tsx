@@ -15,6 +15,7 @@ describe("Launch History Item", () => {
           site="launch site"
           rocket="rocket name"
           status={true}
+          date="2020-08-27T19:19:00-04:00"
         />
       </Router>
     );
@@ -31,5 +32,9 @@ describe("Launch History Item", () => {
   });
   test("should render status", () => {
     expect(root.getByText("Successful")).toBeInTheDocument();
+  });
+
+  test("should not render date", () => {
+    expect(root.queryByText("Augest 8th, 2020")).not.toBeInTheDocument();
   });
 });

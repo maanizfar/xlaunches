@@ -20,12 +20,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LaunchHistory = () => {
+  const startWith = 20;
+  const launchesToFetch = 3;
+
   const [offset, setOffset] = useState(20);
   const { loading, error, data, fetchMore } = useLaunchesQuery({
     variables: {
       order: "desc",
       sort: "launch_date_local",
-      limit: 20,
+      limit: startWith,
       offset: 0,
     },
   });
@@ -36,8 +39,6 @@ const LaunchHistory = () => {
   const past_launches = data?.launches?.filter((launch) => !launch?.upcoming);
 
   function loadMoreHandler() {
-    const launchesToFetch = 5;
-
     fetchMore({
       variables: {
         order: "desc",
@@ -71,6 +72,9 @@ const LaunchHistory = () => {
                   <LaunchHistoryItem
                     id={launch?.id ? launch?.id : ""}
                     title={launch?.mission_name ? launch?.mission_name : "N/A"}
+                    date={
+                      launch?.launch_date_local ? launch.launch_date_local : ""
+                    }
                     site={
                       launch?.launch_site?.site_name_long
                         ? launch.launch_site.site_name_long
