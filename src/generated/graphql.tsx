@@ -1320,6 +1320,29 @@ export type CoreMission = {
   flight?: Maybe<Scalars['Int']>;
 };
 
+export type LaunchesQueryVariables = Exact<{
+  order: Scalars['String'];
+  sort: Scalars['String'];
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type LaunchesQuery = (
+  { __typename?: 'Query' }
+  & { launches?: Maybe<Array<Maybe<(
+    { __typename?: 'Launch' }
+    & Pick<Launch, 'id' | 'mission_name' | 'launch_date_local' | 'launch_success' | 'upcoming'>
+    & { launch_site?: Maybe<(
+      { __typename?: 'LaunchSite' }
+      & Pick<LaunchSite, 'site_name_long'>
+    )>, rocket?: Maybe<(
+      { __typename?: 'LaunchRocket' }
+      & Pick<LaunchRocket, 'rocket_name'>
+    )> }
+  )>>> }
+);
+
 export type NextLaunchQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1346,6 +1369,52 @@ export type NextLaunchQuery = (
 );
 
 
+export const LaunchesDocument = gql`
+    query Launches($order: String!, $sort: String!, $limit: Int, $offset: Int) {
+  launches(order: $order, sort: $sort, limit: $limit, offset: $offset) {
+    id
+    mission_name
+    launch_date_local
+    launch_success
+    upcoming
+    launch_site {
+      site_name_long
+    }
+    rocket {
+      rocket_name
+    }
+  }
+}
+    `;
+
+/**
+ * __useLaunchesQuery__
+ *
+ * To run a query within a React component, call `useLaunchesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLaunchesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLaunchesQuery({
+ *   variables: {
+ *      order: // value for 'order'
+ *      sort: // value for 'sort'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *   },
+ * });
+ */
+export function useLaunchesQuery(baseOptions?: Apollo.QueryHookOptions<LaunchesQuery, LaunchesQueryVariables>) {
+        return Apollo.useQuery<LaunchesQuery, LaunchesQueryVariables>(LaunchesDocument, baseOptions);
+      }
+export function useLaunchesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LaunchesQuery, LaunchesQueryVariables>) {
+          return Apollo.useLazyQuery<LaunchesQuery, LaunchesQueryVariables>(LaunchesDocument, baseOptions);
+        }
+export type LaunchesQueryHookResult = ReturnType<typeof useLaunchesQuery>;
+export type LaunchesLazyQueryHookResult = ReturnType<typeof useLaunchesLazyQuery>;
+export type LaunchesQueryResult = Apollo.QueryResult<LaunchesQuery, LaunchesQueryVariables>;
 export const NextLaunchDocument = gql`
     query NextLaunch {
   launchNext {

@@ -17,10 +17,24 @@ const theme = createMuiTheme({
       main: "#0693FB",
     },
     text: {
-      secondary: "#0693FB",
+      secondary: "#A7A9AC",
     },
   },
   typography: {
+    h3: {
+      fontSize: "2rem",
+
+      "@media (min-width: 960px)": {
+        fontSize: "3rem",
+      },
+    },
+    h5: {
+      fontSize: "1.25rem",
+
+      "@media (min-width: 960px)": {
+        fontSize: "1.5rem",
+      },
+    },
     fontFamily: [
       "Saira Semi Condensed",
       "Roboto",

@@ -1,7 +1,12 @@
 import React from "react";
+import LaunchHistory from "../components/launches";
 
-const Launches = () => {
-  return <div>Launches</div>;
+const LaunchesPage = () => {
+  return (
+    <section id="launch-history">
+      <LaunchHistory />
+    </section>
+  );
 };
 
-export default Launches;
+export default LaunchesPage;
