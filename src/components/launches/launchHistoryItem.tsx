@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -41,6 +41,7 @@ const LaunchHistoryItem: React.FC<LaunchHistoryItemProps> = ({
   rocket,
 }: LaunchHistoryItemProps) => {
   const { container, titleText, statusText } = useStyles({ status });
+  const navigate = useNavigate();
 
   return (
     <div className={container}>
@@ -82,7 +83,7 @@ const LaunchHistoryItem: React.FC<LaunchHistoryItemProps> = ({
         {status ? "Successful" : "Failed"}
       </Typography>
 
-      <Button variant="outlined" color="secondary">
+      <Button variant="outlined" color="secondary" onClick={() => navigate(id)}>
         More Details
       </Button>
     </div>

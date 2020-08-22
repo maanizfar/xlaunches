@@ -1,19 +1,11 @@
 import React, { useState } from "react";
-import moment from "moment";
 import { useLaunchesQuery } from "../../generated/graphql";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Timeline from "@material-ui/lab/Timeline";
-import TimelineItem from "@material-ui/lab/TimelineItem";
-import TimelineSeparator from "@material-ui/lab/TimelineSeparator";
-import TimelineConnector from "@material-ui/lab/TimelineConnector";
-import TimelineContent from "@material-ui/lab/TimelineContent";
-import TimelineDot from "@material-ui/lab/TimelineDot";
-import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
-
+import Timeline from "../timeline";
 import LaunchHistoryItem from "./launchHistoryItem";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,15 +16,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     padding: theme.spacing(4),
-  },
-
-  content: {
-    padding: 0,
-    flexGrow: 2.5,
-
-    [theme.breakpoints.up("md")]: {
-      flexGrow: 1.6,
-    },
   },
 }));
 
@@ -46,7 +29,7 @@ const LaunchHistory = () => {
       offset: 0,
     },
   });
-  const { heading, buttonContainer, content } = useStyles();
+  const { heading, buttonContainer } = useStyles();
 
   if (error) return <p>error</p>;
 
@@ -79,31 +62,12 @@ const LaunchHistory = () => {
         <p>loading...</p>
       ) : (
         <>
-          <Timeline align="left" data-testid="timeline">
-            {past_launches?.map((launch, i) => (
-              <TimelineItem key={i}>
-                <TimelineOppositeContent>
-                  <Typography
-                    variant="body1"
-                    component="p"
-                    style={{ margin: 0 }}
-                  >
-                    {moment(launch?.launch_date_local).format("MMMM Do, YYYY")}
-                  </Typography>
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                  <TimelineDot
-                    style={{
-                      backgroundColor: launch?.launch_success ? "green" : "red",
-                    }}
-                  />
-                  <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent
-                  classes={{
-                    root: content,
-                  }}
-                >
+          {past_launches && (
+            <Timeline
+              data={past_launches?.map((launch, i) => ({
+                time: launch?.launch_date_local ? launch.launch_date_local : "",
+                dotColor: launch?.launch_success ? "green" : "red",
+                content: (
                   <LaunchHistoryItem
                     id={launch?.id ? launch?.id : ""}
                     title={launch?.mission_name ? launch?.mission_name : "N/A"}
@@ -121,10 +85,11 @@ const LaunchHistory = () => {
                         : "N/A"
                     }
                   />
-                </TimelineContent>
-              </TimelineItem>
-            ))}
-          </Timeline>
+                ),
+              }))}
+            />
+          )}
+
           <div className={buttonContainer}>
             <Button
               color="secondary"
