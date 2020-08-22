@@ -1391,6 +1391,37 @@ export type NextLaunchQuery = (
   )> }
 );
 
+export type RocketsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RocketsQuery = (
+  { __typename?: 'Query' }
+  & { rockets?: Maybe<Array<Maybe<(
+    { __typename?: 'Rocket' }
+    & Pick<Rocket, 'name' | 'description' | 'first_flight' | 'active' | 'boosters' | 'cost_per_launch' | 'success_rate_pct' | 'wikipedia'>
+    & { engines?: Maybe<(
+      { __typename?: 'RocketEngines' }
+      & Pick<RocketEngines, 'number' | 'propellant_1' | 'propellant_2' | 'thrust_to_weight' | 'type'>
+      & { thrust_vacuum?: Maybe<(
+        { __typename?: 'Force' }
+        & Pick<Force, 'kN'>
+      )>, thrust_sea_level?: Maybe<(
+        { __typename?: 'Force' }
+        & Pick<Force, 'kN'>
+      )> }
+    )>, mass?: Maybe<(
+      { __typename?: 'Mass' }
+      & Pick<Mass, 'kg'>
+    )>, diameter?: Maybe<(
+      { __typename?: 'Distance' }
+      & Pick<Distance, 'meters'>
+    )>, height?: Maybe<(
+      { __typename?: 'Distance' }
+      & Pick<Distance, 'meters'>
+    )> }
+  )>>> }
+);
+
 
 export const EventsDocument = gql`
     query Events($limit: Int, $offset: Int, $order: String, $sort: String) {
@@ -1529,3 +1560,64 @@ export function useNextLaunchLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type NextLaunchQueryHookResult = ReturnType<typeof useNextLaunchQuery>;
 export type NextLaunchLazyQueryHookResult = ReturnType<typeof useNextLaunchLazyQuery>;
 export type NextLaunchQueryResult = Apollo.QueryResult<NextLaunchQuery, NextLaunchQueryVariables>;
+export const RocketsDocument = gql`
+    query Rockets {
+  rockets {
+    name
+    description
+    first_flight
+    active
+    boosters
+    cost_per_launch
+    success_rate_pct
+    wikipedia
+    engines {
+      number
+      propellant_1
+      propellant_2
+      thrust_vacuum {
+        kN
+      }
+      thrust_to_weight
+      thrust_sea_level {
+        kN
+      }
+      type
+    }
+    mass {
+      kg
+    }
+    diameter {
+      meters
+    }
+    height {
+      meters
+    }
+  }
+}
+    `;
+
+/**
+ * __useRocketsQuery__
+ *
+ * To run a query within a React component, call `useRocketsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRocketsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRocketsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useRocketsQuery(baseOptions?: Apollo.QueryHookOptions<RocketsQuery, RocketsQueryVariables>) {
+        return Apollo.useQuery<RocketsQuery, RocketsQueryVariables>(RocketsDocument, baseOptions);
+      }
+export function useRocketsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RocketsQuery, RocketsQueryVariables>) {
+          return Apollo.useLazyQuery<RocketsQuery, RocketsQueryVariables>(RocketsDocument, baseOptions);
+        }
+export type RocketsQueryHookResult = ReturnType<typeof useRocketsQuery>;
+export type RocketsLazyQueryHookResult = ReturnType<typeof useRocketsLazyQuery>;
+export type RocketsQueryResult = Apollo.QueryResult<RocketsQuery, RocketsQueryVariables>;

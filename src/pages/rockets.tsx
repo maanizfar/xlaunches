@@ -1,7 +1,12 @@
 import React from "react";
+import Rockets from "../components/rockets";
 
-const Rockets = () => {
-  return <div>Rockets</div>;
+const RocketsPage = () => {
+  return (
+    <section id="rockets">
+      <Rockets />
+    </section>
+  );
 };
 
-export default Rockets;
+export default RocketsPage;

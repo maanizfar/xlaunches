@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/home";
 import LaunchesPage from "../pages/launches";
-import Rockets from "../pages/rockets";
+import RocketsPage from "../pages/rockets";
 import About from "../pages/about";
 import Dragons from "../pages/dragons";
 import EventsPage from "../pages/events";
@@ -14,7 +14,7 @@ function App() {
       <Navigation data-testid="nav" />
       <Routes>
         <Route path="/launches" element={<LaunchesPage />} />
-        <Route path="/rockets" element={<Rockets />} />
+        <Route path="/rockets" element={<RocketsPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/dragons" element={<Dragons />} />
         <Route path="/events" element={<EventsPage />} />

@@ -16,19 +16,9 @@ import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    // flexGrow: 100,
     [theme.breakpoints.only("sm")]: {
       flexGrow: 5,
     },
-    // [theme.breakpoints.up("md")]: {
-    //   flexGrow: 3,
-    // },
-    // [theme.breakpoints.up("lg")]: {
-    //   flexGrow: 1.45,
-    // },
-    // [theme.breakpoints.up("xl")]: {
-    //   flexGrow: 1.2,
-    // },
   },
 
   oppositeContent: {
