@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     border: `1px solid ${theme.palette.divider}`,
 
     [theme.breakpoints.up("md")]: {
-      textAlign: "right",
+      // textAlign: "right",
       marginTop: 0,
     },
   },

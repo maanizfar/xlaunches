@@ -50,7 +50,7 @@ const InfoRow: React.FC<InfoRowProps> = ({
         <Typography
           variant="body1"
           component="p"
-          color="secondary"
+          color="textSecondary"
           style={{ textTransform: "uppercase" }}
         >
           {label}:

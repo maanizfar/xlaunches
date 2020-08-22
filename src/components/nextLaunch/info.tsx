@@ -44,22 +44,22 @@ const Info: React.FC<NextLaunchInfoProps> = ({
       justify="space-between"
     >
       <Grid container item xs={12} md={6} spacing={2}>
-        <InfoRow label="Mission" infoColWidth={6} labelColWidth={6}>
+        <InfoRow label="Mission" infoColWidth={7} labelColWidth={5}>
           <Typography variant="body1" component="p">
             {mission_name}
           </Typography>
         </InfoRow>
-        <InfoRow label="Launch Date" infoColWidth={6} labelColWidth={6}>
+        <InfoRow label="Launch Date" infoColWidth={7} labelColWidth={5}>
           <Typography variant="body1" component="p">
             {moment(launch_date).format("MMMM Do YYYY, h:mm:ss a")}
           </Typography>
         </InfoRow>
-        <InfoRow label="Launch Site" infoColWidth={6} labelColWidth={6}>
+        <InfoRow label="Launch Site" infoColWidth={7} labelColWidth={5}>
           <Typography variant="body1" component="p">
             {launch_site}
           </Typography>
         </InfoRow>
-        <InfoRow label="rocket" infoColWidth={6} labelColWidth={6}>
+        <InfoRow label="rocket" infoColWidth={7} labelColWidth={5}>
           <Typography variant="body1" component="p">
             {rocket_name}
           </Typography>

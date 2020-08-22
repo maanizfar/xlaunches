@@ -31,7 +31,7 @@ const Payloads: React.FC<PayloadProps> = ({ payloads }) => {
         className={classes.heading}
         component="h6"
         variant="h6"
-        color="textSecondary"
+        color="secondary"
       >
         Payloads
       </Typography>

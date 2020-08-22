@@ -36,7 +36,7 @@ const TimerItem: React.FC<TimerItemProps> = ({ value, children }) => {
 
   return (
     <div className={classes.container}>
-      <Typography component="p" className={classes.value} color="textSecondary">
+      <Typography component="p" className={classes.value} color="secondary">
         {value}
       </Typography>
       <Typography component="p" variant="button" className={classes.label}>
