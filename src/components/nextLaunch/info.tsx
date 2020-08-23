@@ -6,6 +6,7 @@ import InfoRow from "./infoRow";
 import { makeStyles } from "@material-ui/core/styles";
 import Payloads from "./payloads";
 import { Typography } from "@material-ui/core";
+import Characteristic from "../characteristic";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,26 +45,13 @@ const Info: React.FC<NextLaunchInfoProps> = ({
       justify="space-between"
     >
       <Grid container item xs={12} md={6} spacing={2}>
-        <InfoRow label="Mission" infoColWidth={7} labelColWidth={5}>
-          <Typography variant="body1" component="p">
-            {mission_name}
-          </Typography>
-        </InfoRow>
-        <InfoRow label="Launch Date" infoColWidth={7} labelColWidth={5}>
-          <Typography variant="body1" component="p">
-            {moment(launch_date).format("MMMM Do YYYY, h:mm:ss a")}
-          </Typography>
-        </InfoRow>
-        <InfoRow label="Launch Site" infoColWidth={7} labelColWidth={5}>
-          <Typography variant="body1" component="p">
-            {launch_site}
-          </Typography>
-        </InfoRow>
-        <InfoRow label="rocket" infoColWidth={7} labelColWidth={5}>
-          <Typography variant="body1" component="p">
-            {rocket_name}
-          </Typography>
-        </InfoRow>
+        <Characteristic label="Mission" value={mission_name} />
+        <Characteristic
+          label="Launch Date"
+          value={moment(launch_date).format("MMMM Do YYYY, h:mm:ss a")}
+        />
+        <Characteristic label="Launch Site" value={launch_site} />
+        <Characteristic label="Rocket" value={rocket_name} />
       </Grid>
 
       <Grid item xs={12} md={4}>
