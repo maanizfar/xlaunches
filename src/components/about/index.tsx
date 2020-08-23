@@ -55,6 +55,10 @@ const About = () => {
             value="https://api.spacex.land"
             link="https://api.spacex.land"
           />
+          <Characteristic
+            label="Technologies used"
+            value="React, GraphQL, ApolloClient & Material-UI"
+          />
         </Container>
 
         {loading && <Loading />}

@@ -2,10 +2,8 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { Payload, Maybe } from "../../generated/graphql";
 import moment from "moment";
-import InfoRow from "./infoRow";
 import { makeStyles } from "@material-ui/core/styles";
 import Payloads from "./payloads";
-import { Typography } from "@material-ui/core";
 import Characteristic from "../characteristic";
 
 const useStyles = makeStyles((theme) => ({
