@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Timeline from "../timeline";
 import EventItem from "./eventItem";
+import Loading from "../loading";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -31,6 +32,7 @@ const Events = () => {
       limit: startWith,
       offset: 0,
     },
+    notifyOnNetworkStatusChange: true,
   });
   const { heading, buttonContainer } = useStyles();
 
@@ -58,8 +60,8 @@ const Events = () => {
       >
         Events
       </Typography>
-      {loading ? (
-        <p>loading...</p>
+      {loading && offset === startWith ? (
+        <Loading />
       ) : (
         <>
           {data?.histories && (
@@ -82,6 +84,7 @@ const Events = () => {
               }))}
             />
           )}
+          {loading && <Loading />}
 
           <div className={buttonContainer}>
             <Button

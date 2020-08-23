@@ -5,6 +5,7 @@ import { useRocketsQuery } from "../../generated/graphql";
 
 import RocketItem from "./rocketItem";
 import { Container } from "@material-ui/core";
+import Loading from "../loading";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -29,7 +30,7 @@ const Rockets = () => {
       >
         Rockets
       </Typography>
-      {loading && <p>loading...</p>}
+      {loading && <Loading />}
       {data?.rockets &&
         data.rockets.map((rocket, i) => (
           <RocketItem

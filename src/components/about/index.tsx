@@ -5,6 +5,7 @@ import { Container } from "@material-ui/core";
 import { useCompanyInfoQuery } from "../../generated/graphql";
 import Characteristic from "../characteristic";
 import Link from "@material-ui/core/Link";
+import Loading from "../loading";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -56,7 +57,7 @@ const About = () => {
           />
         </Container>
 
-        {loading && <p>Loading...</p>}
+        {loading && <Loading />}
 
         {data && (
           <>

@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Timeline from "../timeline";
 import LaunchHistoryItem from "./launchHistoryItem";
+import Loading from "../loading";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -31,6 +32,7 @@ const LaunchHistory = () => {
       limit: startWith,
       offset: 0,
     },
+    notifyOnNetworkStatusChange: true,
   });
   const { heading, buttonContainer } = useStyles();
 
@@ -59,8 +61,8 @@ const LaunchHistory = () => {
       >
         Launch History
       </Typography>
-      {loading ? (
-        <p>loading...</p>
+      {loading && offset === startWith ? (
+        <Loading />
       ) : (
         <>
           {past_launches && (
@@ -93,6 +95,8 @@ const LaunchHistory = () => {
               }))}
             />
           )}
+
+          {loading && <Loading />}
 
           <div className={buttonContainer}>
             <Button
