@@ -1320,6 +1320,24 @@ export type CoreMission = {
   flight?: Maybe<Scalars['Int']>;
 };
 
+export type CompanyInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CompanyInfoQuery = (
+  { __typename?: 'Query' }
+  & { company?: Maybe<(
+    { __typename?: 'Info' }
+    & Pick<Info, 'name' | 'summary' | 'founded' | 'founder' | 'ceo' | 'coo' | 'cto' | 'cto_propulsion' | 'valuation' | 'employees'>
+    & { headquarters?: Maybe<(
+      { __typename?: 'Address' }
+      & Pick<Address, 'address' | 'city' | 'state'>
+    )>, links?: Maybe<(
+      { __typename?: 'InfoLinks' }
+      & Pick<InfoLinks, 'elon_twitter' | 'flickr' | 'twitter' | 'website'>
+    )> }
+  )> }
+);
+
 export type EventsQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -1423,6 +1441,58 @@ export type RocketsQuery = (
 );
 
 
+export const CompanyInfoDocument = gql`
+    query CompanyInfo {
+  company {
+    name
+    summary
+    founded
+    founder
+    ceo
+    coo
+    cto
+    cto_propulsion
+    valuation
+    employees
+    headquarters {
+      address
+      city
+      state
+    }
+    links {
+      elon_twitter
+      flickr
+      twitter
+      website
+    }
+  }
+}
+    `;
+
+/**
+ * __useCompanyInfoQuery__
+ *
+ * To run a query within a React component, call `useCompanyInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCompanyInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCompanyInfoQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCompanyInfoQuery(baseOptions?: Apollo.QueryHookOptions<CompanyInfoQuery, CompanyInfoQueryVariables>) {
+        return Apollo.useQuery<CompanyInfoQuery, CompanyInfoQueryVariables>(CompanyInfoDocument, baseOptions);
+      }
+export function useCompanyInfoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CompanyInfoQuery, CompanyInfoQueryVariables>) {
+          return Apollo.useLazyQuery<CompanyInfoQuery, CompanyInfoQueryVariables>(CompanyInfoDocument, baseOptions);
+        }
+export type CompanyInfoQueryHookResult = ReturnType<typeof useCompanyInfoQuery>;
+export type CompanyInfoLazyQueryHookResult = ReturnType<typeof useCompanyInfoLazyQuery>;
+export type CompanyInfoQueryResult = Apollo.QueryResult<CompanyInfoQuery, CompanyInfoQueryVariables>;
 export const EventsDocument = gql`
     query Events($limit: Int, $offset: Int, $order: String, $sort: String) {
   histories(limit: $limit, offset: $offset, order: $order, sort: $sort) {

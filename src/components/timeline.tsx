@@ -15,6 +15,12 @@ import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
 import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    [theme.breakpoints.only("xs")]: {
+      padding: 0,
+    },
+  },
+
   content: {
     [theme.breakpoints.only("sm")]: {
       flexGrow: 5,
@@ -39,12 +45,12 @@ type TimelineProps = {
 };
 
 const Timeline: React.FC<TimelineProps> = ({ data }: TimelineProps) => {
-  const { content, oppositeContent } = useStyles();
+  const { container, content, oppositeContent } = useStyles();
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Container>
+    <Container className={container}>
       <MDTimeline
         align={smallScreen ? "left" : "alternate"}
         data-testid="timeline"

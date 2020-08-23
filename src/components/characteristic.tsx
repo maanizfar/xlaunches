@@ -1,6 +1,7 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -20,22 +21,38 @@ type RocketInfoItemProps = {
   label: string;
   value: string | number;
   unit?: string | null;
+  link?: string;
 };
 
 const Characteristic: React.FC<RocketInfoItemProps> = ({
   label,
   value,
   unit,
+  link,
 }: RocketInfoItemProps) => {
   const { container } = useStyles();
   return (
     <div className={container}>
-      <Typography component="p" variant="body1">
+      <Typography
+        component="p"
+        variant="body1"
+        color="textSecondary"
+        style={{ marginRight: "16px" }}
+      >
         {label}
       </Typography>
-      <Typography component="p" variant="body1">
-        {value} {unit ? unit : ""}
-      </Typography>
+
+      {link ? (
+        <Link href={link} color="secondary" target="_blank">
+          <Typography component="p" variant="body1">
+            {value} {unit ? unit : ""}
+          </Typography>
+        </Link>
+      ) : (
+        <Typography component="p" variant="body1" align="right">
+          {value} {unit ? unit : ""}
+        </Typography>
+      )}
     </div>
   );
 };

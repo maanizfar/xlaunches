@@ -21,10 +21,6 @@ const routes: Route[] = [
     path: "/rockets",
   },
   {
-    name: "Dragons",
-    path: "/dragons",
-  },
-  {
     name: "About",
     path: "/about",
   },
