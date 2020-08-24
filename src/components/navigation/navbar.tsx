@@ -7,6 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
+import LogoImage from "../../images/logo192.png";
 
 import NavLink from "./navLink";
 import { Container } from "@material-ui/core";
@@ -51,7 +52,7 @@ const Navbar: React.FunctionComponent<NavbarProps> = ({
       <Container maxWidth="lg">
         <Toolbar className={classes.container}>
           <Link to="/">
-            <img src="/logo192.png" alt="logo" width="220px" />
+            <img src={LogoImage} alt="logo" width="220px" />
           </Link>
 
           <div className={classes.rightContainer}>

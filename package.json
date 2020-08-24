@@ -13,6 +13,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "apollo-cache-persist": "^0.1.1",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "history": "^5.0.0",
