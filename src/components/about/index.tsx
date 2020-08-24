@@ -11,10 +11,35 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     margin: theme.spacing(4),
   },
+
+  row: {
+    [theme.breakpoints.up("sm")]: {
+      display: "flex",
+    },
+  },
+
+  details: {
+    [theme.breakpoints.up("sm")]: {
+      marginTop: theme.spacing(1),
+      marginRight: theme.spacing(4),
+    },
+  },
+
+  tableContainer: {
+    width: "100%",
+
+    [theme.breakpoints.only("xs")]: {
+      marginTop: theme.spacing(2),
+    },
+
+    [theme.breakpoints.up("sm")]: {
+      minWidth: 300,
+    },
+  },
 }));
 
 const About = () => {
-  const { heading } = useStyles();
+  const { heading, row, details, tableContainer } = useStyles();
   const { loading, error, data } = useCompanyInfoQuery();
 
   if (error) return <p>error</p>;
@@ -37,15 +62,20 @@ const About = () => {
       >
         About This Website
       </Typography>
-      <Container maxWidth="md">
-        <Typography component="p" variant="body1" align="center" gutterBottom>
+      <Container maxWidth="md" className={row}>
+        <Typography
+          component="p"
+          variant="body1"
+          align="justify"
+          className={details}
+        >
           Xlaunches is an open source web application for viewing future and
           past SpaceX launches. It has a countdown timer that shows the time
           before the next launch, and information about each previous launch and
           event.
         </Typography>
-        <br />
-        <Container maxWidth="xs">
+
+        <div className={tableContainer}>
           <Characteristic
             label="Created by"
             value="Salman Zafar"
@@ -60,39 +90,41 @@ const About = () => {
             label="Technologies used"
             value="React, GraphQL, ApolloClient & Material-UI"
           />
-        </Container>
+        </div>
+      </Container>
 
-        {loading && <Loading />}
+      {loading && <Loading />}
 
-        {data && (
-          <>
-            <Typography
-              className={heading}
-              component="h4"
-              variant="h4"
-              align="center"
-            >
-              About{" "}
-              {data.company?.links?.website && (
-                <Link
-                  href={data.company.links.website}
-                  color="secondary"
-                  target="_blank"
-                >
-                  SpaceX
-                </Link>
-              )}
-            </Typography>
+      {data && (
+        <>
+          <Typography
+            className={heading}
+            component="h4"
+            variant="h4"
+            align="center"
+          >
+            About{" "}
+            {data.company?.links?.website && (
+              <Link
+                href={data.company.links.website}
+                color="secondary"
+                target="_blank"
+              >
+                SpaceX
+              </Link>
+            )}
+          </Typography>
+          <Container maxWidth="md" className={row}>
             <Typography
               component="p"
               variant="body1"
-              align="center"
-              gutterBottom
+              align="justify"
+              className={details}
             >
               {data.company?.summary ? data.company.summary : "N/A"}
             </Typography>
-            <br />
-            <Container maxWidth="xs">
+
+            <div className={tableContainer}>
               <Characteristic label="Headquaters" value={headquarters} />
               <Characteristic
                 label="Founded"
@@ -132,12 +164,12 @@ const About = () => {
                     : "N/A"
                 }
               />
-            </Container>
-          </>
-        )}
-      </Container>
+            </div>
+          </Container>
+        </>
+      )}
 
-      <Container>
+      <Container maxWidth="md">
         <Typography
           component="p"
           variant="body1"

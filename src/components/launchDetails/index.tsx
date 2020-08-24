@@ -92,7 +92,12 @@ const LaunchDetails = () => {
               )}
               <br />
               {data?.launch?.details && (
-                <Typography component="p" variant="body1" gutterBottom>
+                <Typography
+                  component="p"
+                  variant="body1"
+                  align="justify"
+                  gutterBottom
+                >
                   {data.launch.details}
                 </Typography>
               )}
@@ -128,7 +133,7 @@ const LaunchDetails = () => {
                 label="Successful"
                 value={data?.launch?.launch_success ? "Yes" : "No"}
               />
-
+              <br />
               {data?.launch?.rocket?.first_stage?.cores && (
                 <>
                   <Typography component="h5" variant="h5" align="center">
@@ -162,6 +167,7 @@ const LaunchDetails = () => {
                 </>
               )}
 
+              <br />
               {data?.launch?.rocket?.second_stage?.payloads && (
                 <>
                   <Typography component="h5" variant="h5" align="center">
@@ -222,7 +228,7 @@ const LaunchDetails = () => {
                   )}
                 </>
               )}
-
+              <br />
               {data?.launch?.rocket?.fairings && (
                 <>
                   <Typography component="h5" variant="h5" align="center">

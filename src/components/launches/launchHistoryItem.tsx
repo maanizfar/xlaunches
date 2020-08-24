@@ -64,7 +64,7 @@ const LaunchHistoryItem: React.FC<LaunchHistoryItemProps> = ({
         </Typography>
       </Link>
 
-      <Typography variant="body1" gutterBottom>
+      <Typography variant="body1" align="justify" gutterBottom>
         {details}
       </Typography>
 

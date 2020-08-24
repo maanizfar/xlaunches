@@ -183,7 +183,12 @@ const RocketItem: React.FC<RocketItemProps> = ({ data }) => {
             {currentTab === Tabs.Description && (
               <Fade in={true} timeout={1000}>
                 <div style={{ minHeight: 245 }}>
-                  <Typography component="p" variant="body1" gutterBottom>
+                  <Typography
+                    component="p"
+                    variant="body1"
+                    align="justify"
+                    gutterBottom
+                  >
                     {data.description}
                   </Typography>
                   <br />

@@ -75,7 +75,7 @@ const EventItem: React.FC<EventItemProps> = ({
           />
         </div>
       )}
-      <Typography component="p" variant="body1" gutterBottom>
+      <Typography component="p" variant="body1" align="justify" gutterBottom>
         {details}
       </Typography>
     </div>
