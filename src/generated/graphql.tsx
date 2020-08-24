@@ -1361,6 +1361,56 @@ export type EventsQuery = (
   )>>> }
 );
 
+export type LaunchDetailsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type LaunchDetailsQuery = (
+  { __typename?: 'Query' }
+  & { launch?: Maybe<(
+    { __typename?: 'Launch' }
+    & Pick<Launch, 'mission_name' | 'details' | 'upcoming' | 'is_tentative' | 'launch_date_local' | 'launch_success'>
+    & { launch_site?: Maybe<(
+      { __typename?: 'LaunchSite' }
+      & Pick<LaunchSite, 'site_name_long'>
+    )>, links?: Maybe<(
+      { __typename?: 'LaunchLinks' }
+      & Pick<LaunchLinks, 'mission_patch' | 'flickr_images' | 'video_link' | 'wikipedia'>
+    )>, telemetry?: Maybe<(
+      { __typename?: 'LaunchTelemetry' }
+      & Pick<LaunchTelemetry, 'flight_club'>
+    )>, rocket?: Maybe<(
+      { __typename?: 'LaunchRocket' }
+      & Pick<LaunchRocket, 'rocket_name'>
+      & { fairings?: Maybe<(
+        { __typename?: 'LaunchRocketFairings' }
+        & Pick<LaunchRocketFairings, 'recovered' | 'recovery_attempt' | 'reused' | 'ship'>
+      )>, first_stage?: Maybe<(
+        { __typename?: 'LaunchRocketFirstStage' }
+        & { cores?: Maybe<Array<Maybe<(
+          { __typename?: 'LaunchRocketFirstStageCore' }
+          & Pick<LaunchRocketFirstStageCore, 'flight' | 'gridfins' | 'land_success' | 'landing_intent' | 'landing_type' | 'landing_vehicle' | 'legs' | 'reused'>
+          & { core?: Maybe<(
+            { __typename?: 'Core' }
+            & Pick<Core, 'asds_attempts' | 'asds_landings' | 'block' | 'id' | 'original_launch' | 'reuse_count' | 'rtls_attempts' | 'rtls_landings' | 'status' | 'water_landing'>
+            & { missions?: Maybe<Array<Maybe<(
+              { __typename?: 'CapsuleMission' }
+              & Pick<CapsuleMission, 'flight' | 'name'>
+            )>>> }
+          )> }
+        )>>> }
+      )>, second_stage?: Maybe<(
+        { __typename?: 'LaunchRocketSecondStage' }
+        & { payloads?: Maybe<Array<Maybe<(
+          { __typename?: 'Payload' }
+          & Pick<Payload, 'manufacturer' | 'nationality' | 'customers' | 'orbit' | 'payload_type' | 'reused' | 'payload_mass_kg' | 'payload_mass_lbs'>
+        )>>> }
+      )> }
+    )> }
+  )> }
+);
+
 export type LaunchesQueryVariables = Exact<{
   order: Scalars['String'];
   sort: Scalars['String'];
@@ -1373,7 +1423,7 @@ export type LaunchesQuery = (
   { __typename?: 'Query' }
   & { launches?: Maybe<Array<Maybe<(
     { __typename?: 'Launch' }
-    & Pick<Launch, 'id' | 'mission_name' | 'launch_date_local' | 'launch_success' | 'upcoming'>
+    & Pick<Launch, 'id' | 'details' | 'mission_name' | 'launch_date_local' | 'launch_success' | 'upcoming'>
     & { launch_site?: Maybe<(
       { __typename?: 'LaunchSite' }
       & Pick<LaunchSite, 'site_name_long'>
@@ -1536,10 +1586,110 @@ export function useEventsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Eve
 export type EventsQueryHookResult = ReturnType<typeof useEventsQuery>;
 export type EventsLazyQueryHookResult = ReturnType<typeof useEventsLazyQuery>;
 export type EventsQueryResult = Apollo.QueryResult<EventsQuery, EventsQueryVariables>;
+export const LaunchDetailsDocument = gql`
+    query LaunchDetails($id: ID!) {
+  launch(id: $id) {
+    mission_name
+    details
+    upcoming
+    is_tentative
+    launch_date_local
+    launch_success
+    launch_site {
+      site_name_long
+    }
+    links {
+      mission_patch
+      flickr_images
+      video_link
+      wikipedia
+    }
+    telemetry {
+      flight_club
+    }
+    rocket {
+      rocket_name
+      fairings {
+        recovered
+        recovery_attempt
+        reused
+        ship
+      }
+      first_stage {
+        cores {
+          core {
+            missions {
+              flight
+              name
+            }
+            asds_attempts
+            asds_landings
+            block
+            id
+            original_launch
+            reuse_count
+            rtls_attempts
+            rtls_landings
+            status
+            water_landing
+          }
+          flight
+          gridfins
+          land_success
+          landing_intent
+          landing_type
+          landing_vehicle
+          legs
+          reused
+        }
+      }
+      second_stage {
+        payloads {
+          manufacturer
+          nationality
+          customers
+          orbit
+          payload_type
+          reused
+          payload_mass_kg
+          payload_mass_lbs
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useLaunchDetailsQuery__
+ *
+ * To run a query within a React component, call `useLaunchDetailsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLaunchDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLaunchDetailsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useLaunchDetailsQuery(baseOptions?: Apollo.QueryHookOptions<LaunchDetailsQuery, LaunchDetailsQueryVariables>) {
+        return Apollo.useQuery<LaunchDetailsQuery, LaunchDetailsQueryVariables>(LaunchDetailsDocument, baseOptions);
+      }
+export function useLaunchDetailsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LaunchDetailsQuery, LaunchDetailsQueryVariables>) {
+          return Apollo.useLazyQuery<LaunchDetailsQuery, LaunchDetailsQueryVariables>(LaunchDetailsDocument, baseOptions);
+        }
+export type LaunchDetailsQueryHookResult = ReturnType<typeof useLaunchDetailsQuery>;
+export type LaunchDetailsLazyQueryHookResult = ReturnType<typeof useLaunchDetailsLazyQuery>;
+export type LaunchDetailsQueryResult = Apollo.QueryResult<LaunchDetailsQuery, LaunchDetailsQueryVariables>;
 export const LaunchesDocument = gql`
     query Launches($order: String!, $sort: String!, $limit: Int, $offset: Int) {
   launches(order: $order, sort: $sort, limit: $limit, offset: $offset) {
     id
+    details
     mission_name
     launch_date_local
     launch_success

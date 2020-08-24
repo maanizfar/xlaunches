@@ -12,13 +12,6 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 600,
   },
 
-  titleText: {
-    transition: "all 0.3s ease-in",
-    "&:hover": {
-      color: theme.palette.secondary.main,
-    },
-  },
-
   playerWrapper: {
     position: "relative",
     width: "100%",
@@ -50,7 +43,7 @@ const EventItem: React.FC<EventItemProps> = ({
   details,
   videolink,
 }: EventItemProps) => {
-  const { container, titleText, videoPlayer, playerWrapper } = useStyles();
+  const { container, videoPlayer, playerWrapper } = useStyles();
 
   return (
     <div className={container}>
@@ -65,13 +58,7 @@ const EventItem: React.FC<EventItemProps> = ({
         </Typography>
       </Hidden>
 
-      <Typography
-        component="h5"
-        variant="h5"
-        color="textPrimary"
-        className={titleText}
-        gutterBottom
-      >
+      <Typography component="h5" variant="h5" color="textPrimary" gutterBottom>
         {title}
       </Typography>
 

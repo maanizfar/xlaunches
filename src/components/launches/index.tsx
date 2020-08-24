@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLaunchesQuery } from "../../generated/graphql";
-
+import { useTheme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -34,6 +34,7 @@ const LaunchHistory = () => {
     },
     notifyOnNetworkStatusChange: true,
   });
+  const theme = useTheme();
   const { heading, buttonContainer } = useStyles();
 
   if (error) return <p>error</p>;
@@ -59,7 +60,7 @@ const LaunchHistory = () => {
         variant="h3"
         align="center"
       >
-        Launch History
+        Launches
       </Typography>
       {loading && offset === startWith ? (
         <Loading />
@@ -69,11 +70,16 @@ const LaunchHistory = () => {
             <Timeline
               data={past_launches?.map((launch, i) => ({
                 time: launch?.launch_date_local ? launch.launch_date_local : "",
-                dotColor: launch?.launch_success ? "green" : "red",
+                dotColor: launch?.upcoming
+                  ? theme.palette.secondary.main
+                  : launch?.launch_success
+                  ? theme.palette.success.main
+                  : theme.palette.error.main,
                 content: (
                   <LaunchHistoryItem
                     id={launch?.id ? launch?.id : ""}
                     title={launch?.mission_name ? launch?.mission_name : "N/A"}
+                    details={launch?.details ? launch.details : "N/A"}
                     date={
                       launch?.launch_date_local ? launch.launch_date_local : ""
                     }
@@ -83,7 +89,11 @@ const LaunchHistory = () => {
                         : "N/A"
                     }
                     status={
-                      launch?.launch_success ? launch.launch_success : false
+                      launch?.upcoming
+                        ? "Upcoming"
+                        : launch?.launch_success
+                        ? "Successful"
+                        : "Failed"
                     }
                     rocket={
                       launch?.rocket?.rocket_name

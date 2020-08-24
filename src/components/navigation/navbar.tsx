@@ -51,7 +51,7 @@ const Navbar: React.FunctionComponent<NavbarProps> = ({
       <Container maxWidth="lg">
         <Toolbar className={classes.container}>
           <Link to="/">
-            <img src="images/logo192.png" alt="logo" width="220px" />
+            <img src="/logo192.png" alt="logo" width="220px" />
           </Link>
 
           <div className={classes.rightContainer}>

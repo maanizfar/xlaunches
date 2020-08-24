@@ -141,7 +141,12 @@ const RocketItem: React.FC<RocketItemProps> = ({ data }) => {
             color="inherit"
             target="_blank"
           >
-            <Typography component="h4" variant="h4" gutterBottom>
+            <Typography
+              component="h4"
+              variant="h4"
+              color="secondary"
+              gutterBottom
+            >
               {data.name}
             </Typography>
           </Link>

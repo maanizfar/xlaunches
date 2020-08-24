@@ -3,7 +3,7 @@ import { useEventsQuery } from "../../generated/graphql";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import Timeline from "../timeline";
 import EventItem from "./eventItem";
@@ -34,6 +34,8 @@ const Events = () => {
     },
     notifyOnNetworkStatusChange: true,
   });
+
+  const theme = useTheme();
   const { heading, buttonContainer } = useStyles();
 
   if (error) return <p>error</p>;
@@ -68,7 +70,7 @@ const Events = () => {
             <Timeline
               data={data.histories?.map((event, i) => ({
                 time: event?.event_date_utc ? event.event_date_utc : "",
-                dotColor: "blue",
+                dotColor: theme.palette.secondary.main,
                 content: (
                   <EventItem
                     title={event?.title ? event.title : "N/A"}

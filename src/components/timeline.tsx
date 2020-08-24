@@ -62,8 +62,8 @@ const Timeline: React.FC<TimelineProps> = ({ data }: TimelineProps) => {
                 <Typography
                   variant="body1"
                   component="p"
+                  color="textSecondary"
                   style={{ margin: 0 }}
-                  color="secondary"
                 >
                   {moment(entry.time).format("MMMM Do, YYYY")}
                 </Typography>

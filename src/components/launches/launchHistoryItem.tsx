@@ -13,16 +13,13 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 600,
   },
 
-  titleText: {
-    transition: "all 0.3s ease-in",
-    "&:hover": {
-      color: theme.palette.secondary.main,
-    },
-  },
-
   statusText: {
-    color: (props: { status: boolean }) =>
-      props.status ? theme.palette.success.light : theme.palette.error.light,
+    color: (props: { status: string }) =>
+      props.status === "Successful"
+        ? theme.palette.success.main
+        : props.status === "Failed"
+        ? theme.palette.error.main
+        : theme.palette.text.primary,
   },
 }));
 
@@ -30,8 +27,9 @@ type LaunchHistoryItemProps = {
   id: string;
   date: string;
   title: string;
+  details: string;
   site: string;
-  status: boolean;
+  status: string;
   rocket: string;
 };
 
@@ -42,8 +40,9 @@ const LaunchHistoryItem: React.FC<LaunchHistoryItemProps> = ({
   site,
   status,
   rocket,
+  details,
 }: LaunchHistoryItemProps) => {
-  const { container, titleText, statusText } = useStyles({ status });
+  const { container, statusText } = useStyles({ status });
   const navigate = useNavigate();
 
   return (
@@ -60,16 +59,14 @@ const LaunchHistoryItem: React.FC<LaunchHistoryItemProps> = ({
       </Hidden>
 
       <Link to={id} style={{ textDecoration: "none" }}>
-        <Typography
-          component="h5"
-          variant="h5"
-          color="textPrimary"
-          className={titleText}
-          gutterBottom
-        >
+        <Typography component="h5" variant="h5" color="secondary" gutterBottom>
           {title}
         </Typography>
       </Link>
+
+      <Typography variant="body1" gutterBottom>
+        {details}
+      </Typography>
 
       <Typography component="p" variant="body1" gutterBottom>
         <Typography variant="inherit" color="textSecondary">
@@ -94,7 +91,7 @@ const LaunchHistoryItem: React.FC<LaunchHistoryItemProps> = ({
         <Typography variant="inherit" color="textSecondary">
           STATUS:{" "}
         </Typography>
-        {status ? "Successful" : "Failed"}
+        {status}
       </Typography>
 
       <Button variant="outlined" color="secondary" onClick={() => navigate(id)}>
