@@ -28,7 +28,7 @@ describe("Event item", () => {
   test("should render website summary", () => {
     expect(
       root.getByText(
-        /LaunchX is an open source web application for viewing future and past SpaceX launches. It has a countdown timer that shows the time before the next launch, and information about each previous launch and event./i
+        /Xlaunches is an open source web application for viewing future and past SpaceX launches. It has a countdown timer that shows the time before the next launch, and information about each previous launch and event./i
       )
     ).toBeInTheDocument();
   });

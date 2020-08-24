@@ -12,9 +12,10 @@ describe("Launch History Item", () => {
         <LaunchHistoryItem
           id="100"
           title="mission title"
+          details="details"
           site="launch site"
           rocket="rocket name"
-          status={true}
+          status="Successful"
           date="2020-08-27T19:19:00-04:00"
         />
       </Router>
@@ -23,6 +24,9 @@ describe("Launch History Item", () => {
 
   test("should render title", () => {
     expect(root.getByText("mission title")).toBeInTheDocument();
+  });
+  test("should render details", () => {
+    expect(root.getByText("details")).toBeInTheDocument();
   });
   test("should render launch site", () => {
     expect(root.getByText("launch site")).toBeInTheDocument();

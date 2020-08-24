@@ -22,6 +22,6 @@ describe("Next Launch", () => {
   });
 
   test("should render heading", () => {
-    expect(root.getByText(/Launch History/i)).toBeInTheDocument();
+    expect(root.getByText(/Launches/i)).toBeInTheDocument();
   });
 });

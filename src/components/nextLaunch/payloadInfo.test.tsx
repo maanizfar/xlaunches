@@ -23,7 +23,6 @@ describe("Payload info", () => {
     getByText(/nationality/i);
     getByText("Pakistani");
     getByText(/customers/i);
-    getByText("Sal");
-    getByText("man");
+    getByText("Sal | man");
   });
 });
