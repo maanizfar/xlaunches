@@ -6,6 +6,7 @@ import { useRocketsQuery } from "../../generated/graphql";
 import RocketItem from "./rocketItem";
 import { Container } from "@material-ui/core";
 import Loading from "../loading";
+import Error from "../error";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -17,7 +18,7 @@ const Rockets = () => {
   const { loading, error, data } = useRocketsQuery();
   const { heading } = useStyles();
 
-  if (error) return <p>error</p>;
+  if (error) return <Error />;
 
   return (
     <Container maxWidth="md">

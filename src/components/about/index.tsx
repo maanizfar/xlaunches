@@ -6,6 +6,7 @@ import { useCompanyInfoQuery } from "../../generated/graphql";
 import Characteristic from "../characteristic";
 import Link from "@material-ui/core/Link";
 import Loading from "../loading";
+import Error from "../error";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -42,7 +43,7 @@ const About = () => {
   const { heading, row, details, tableContainer } = useStyles();
   const { loading, error, data } = useCompanyInfoQuery();
 
-  if (error) return <p>error</p>;
+  if (error) return <Error />;
 
   const headquarters = data?.company?.headquarters
     ? data.company.headquarters.address +

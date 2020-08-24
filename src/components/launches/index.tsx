@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Timeline from "../timeline";
 import LaunchHistoryItem from "./launchHistoryItem";
 import Loading from "../loading";
+import Error from "../error";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -37,7 +38,7 @@ const LaunchHistory = () => {
   const theme = useTheme();
   const { heading, buttonContainer } = useStyles();
 
-  if (error) return <p>error</p>;
+  if (error) return <Error />;
 
   const past_launches = data?.launches?.filter((launch) => !launch?.upcoming);
 

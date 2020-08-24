@@ -4,6 +4,7 @@ import Timer from "./timer";
 import Info from "./info";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import Error from "../error";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -50,7 +51,7 @@ const NextLaunch = () => {
 
   const launch_date = launchData?.launch_date_local;
 
-  if (error) return <p>Error</p>;
+  if (error) return <Error />;
 
   return (
     <section id="next-launch">

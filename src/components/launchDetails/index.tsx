@@ -7,6 +7,7 @@ import Loading from "../loading";
 import { Typography, Container } from "@material-ui/core";
 import ReactPlayer from "react-player";
 import Characteristic from "../characteristic";
+import Error from "../error";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
@@ -57,7 +58,7 @@ const LaunchDetails = () => {
 
   const classes = useStyles();
 
-  if (error) return <p>error</p>;
+  if (error) return <Error />;
 
   return (
     <Container>
@@ -66,6 +67,7 @@ const LaunchDetails = () => {
       ) : (
         <>
           <Typography
+            data-testid="name"
             component="h3"
             variant="h3"
             align="center"
@@ -93,6 +95,7 @@ const LaunchDetails = () => {
               <br />
               {data?.launch?.details && (
                 <Typography
+                  data-testid="details"
                   component="p"
                   variant="body1"
                   align="justify"
@@ -103,7 +106,7 @@ const LaunchDetails = () => {
               )}
             </div>
 
-            <Container className={classes.infoContainer}>
+            <Container className={classes.infoContainer} data-testid="info">
               <br />
 
               <Typography component="h5" variant="h5" align="center">
