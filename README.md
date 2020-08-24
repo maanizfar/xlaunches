@@ -6,7 +6,7 @@ Project # 8 for [Panacloud Bootcamp 2020](https://panacloud.github.io/bootcamp-2
 
 [Demo](https://xlaunches.netlify.app/)
 
-![demo](https://raw.githubusercontent.com/maanizfar/xlaunches/demo/public/screenshot.png)
+![demo](https://raw.githubusercontent.com/maanizfar/xlaunches/demo/public/screenshot.jpeg)
 
 Built with:
 
