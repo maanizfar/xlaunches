@@ -39,9 +39,10 @@ const About = () => {
       </Typography>
       <Container maxWidth="md">
         <Typography component="p" variant="body1" align="center" gutterBottom>
-          LaunchX is an open source web application for viewing future and past
-          SpaceX launches. It has a countdown timer that shows the time before
-          the next launch, and information about each previous launch and event.
+          Xlaunches is an open source web application for viewing future and
+          past SpaceX launches. It has a countdown timer that shows the time
+          before the next launch, and information about each previous launch and
+          event.
         </Typography>
         <br />
         <Container maxWidth="xs">

@@ -19,7 +19,6 @@ const Rockets = () => {
 
   if (error) return <p>error</p>;
 
-  if (data) console.log(data);
   return (
     <Container maxWidth="md">
       <Typography
