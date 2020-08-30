@@ -33,6 +33,8 @@ const App = () => {
   >(undefined);
 
   useEffect(() => {
+    if (navigator.onLine) localStorage.clear();
+
     const cache = new InMemoryCache({
       typePolicies: {
         Query: {
